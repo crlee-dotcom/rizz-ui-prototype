@@ -1153,7 +1153,7 @@
      vertical scroll snaps between full-bleed cards.
      Each card has its own CTA → match success.
      ─────────────────────────────────────────────── */
-  /* video pool — randomly assigned per card on load */
+  /* video pool — all 5 videos shuffled, one per card */
   const videoPool = [
     'assets/videos/v1.mp4',
     'assets/videos/v2.mp4',
@@ -1161,14 +1161,10 @@
     'assets/videos/v4.mp4',
     'assets/videos/v5.mp4',
   ];
-  function pickRandomVideos(n) {
-    const shuffled = videoPool.slice().sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, n);
-  }
-  const randomVids = pickRandomVideos(3);
-  const cards = [
+  const shuffledVids = videoPool.slice().sort(() => Math.random() - 0.5);
+
+  const cardData = [
     {
-      video: randomVids[0],
       poster: 'assets/figma_characters/kwon_mina_match.png',
       tags: ['💈 미용사', '💔 NTR', '⛓️ BDSM'],
       name: '권미나', age: 21,
@@ -1176,22 +1172,32 @@
       showHint: true,
     },
     {
-      video: randomVids[1],
       poster: 'assets/figma_characters/kang_iahn.png',
       tags: ['💄 미용사', '💕 츤데레'],
       name: '강이안', age: 32,
       quote: '저희 미용실 처음이시죠? 제가 머리 만져드릴게요~',
-      showHint: false,
     },
     {
-      video: randomVids[2],
       poster: 'assets/figma_characters/girl_3.png',
       tags: ['🎀 비서', '💼 오피스'],
       name: '서지윤', age: 27,
       quote: '오늘 회의 자료 정리, 같이 도와주실래요?',
-      showHint: false,
+    },
+    {
+      poster: 'assets/figma_characters/hong_jian_avatar.png',
+      tags: ['🌸 첫사랑', '💌 편지'],
+      name: '홍지안', age: 24,
+      quote: '오늘은 진짜 할 말이 있어요...',
+    },
+    {
+      poster: 'assets/figma_characters/kwon_mina_profile.png',
+      tags: ['🍷 와인바', '🎵 라운지'],
+      name: '나유정', age: 29,
+      quote: '오늘 한 잔 어때요? 같이 마실 사람이 필요해서요.',
     },
   ];
+
+  const cards = cardData.map((c, i) => ({ ...c, video: shuffledVids[i] }));
 
   const stack = document.getElementById('swipe-stack');
   let activeCardIndex = 0;
