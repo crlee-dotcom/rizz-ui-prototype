@@ -173,15 +173,15 @@
       left: 17px;
       right: 17px;
       bottom: 84px;
-      border-radius: 16px;
       overflow-y: scroll;
       overflow-x: hidden;
       scroll-snap-type: y mandatory;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
-      background: #000;
+      background: transparent;
       display: flex;
       flex-direction: column;
+      gap: 20px;
     }
     .swipe-stack::-webkit-scrollbar { display: none; }
     .swipe-stack { scrollbar-width: none; }
@@ -202,6 +202,14 @@
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
+    }
+    .card-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #111;
     }
     .card-shade {
       position: absolute;
@@ -234,24 +242,24 @@
 
     .swipe-hint {
       position: absolute;
-      top: 47%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 22px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 14px;
+      align-items: flex-start;
+      gap: 4px;
       pointer-events: none;
       z-index: 5;
       animation: bob 1.6s ease-in-out infinite;
     }
     @keyframes bob {
-      0%, 100% { transform: translate(-50%, -50%); }
-      50%      { transform: translate(-50%, -56%); }
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
     }
     .swipe-hint .hand-pointer {
-      width: 110px;
+      width: 64px;
       height: auto;
+      margin-left: 8px;
       filter: drop-shadow(0 6px 14px rgba(0,0,0,0.45));
     }
     .swipe-msg {
@@ -426,6 +434,157 @@
     }
 
     /* ────────────────────────────────────────────────
+       SCREEN 4 — Story intro (2574-2296)
+       ──────────────────────────────────────────────── */
+    .story-screen { background: #fafafa; }
+    .story-top {
+      position: absolute;
+      top: 46px;
+      left: 0; right: 0;
+      height: 56px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      z-index: 10;
+    }
+    .story-top .left,
+    .story-top .right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .icon-btn {
+      width: 32px; height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      color: #1a1a1a;
+    }
+    .story-top .avatar-ring {
+      position: relative;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      padding: 2px;
+      background: conic-gradient(from 220deg, #FF3419 0%, #FF5E19 60%, #FFCB97 100%);
+    }
+    .story-top .avatar-ring img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #ddd;
+      border: 2px solid #fff;
+    }
+    .story-top .name-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.1;
+    }
+    .story-top .name-block .name {
+      font-weight: 700;
+      font-size: 15px;
+      color: #1a1a1a;
+      letter-spacing: -0.04px;
+    }
+    .story-top .name-block .meta {
+      font-size: 12px;
+      color: #1a1a1a;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .story-top .name-block .heart { font-size: 12px; }
+    .story-body {
+      position: absolute;
+      top: 102px;
+      left: 0; right: 0;
+      bottom: 185px;
+      background: #fafafa;
+    }
+    .story-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 185px;
+      background: #fff;
+      border-top: 1px solid #efefef;
+      padding: 8px;
+    }
+    .story-banner {
+      position: relative;
+      width: 100%;
+      height: 119px;
+      border-radius: 12px;
+      overflow: hidden;
+      background-position: center;
+      background-size: cover;
+    }
+    .story-banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.32);
+      pointer-events: none;
+    }
+    .story-banner-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 20px;
+    }
+    .story-banner-content .title {
+      color: #fff;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.045px;
+      text-align: center;
+      line-height: 1.4;
+      text-shadow: 0 4px 6px rgba(0,0,0,0.4);
+    }
+    .story-banner-content .subtitle {
+      color: #fff;
+      font-weight: 500;
+      font-size: 12.5px;
+      letter-spacing: -0.03px;
+      text-align: center;
+      line-height: 1.4;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+    .story-banner-cta {
+      width: 100%;
+      max-width: 220px;
+      height: 36px;
+      background: rgba(255,94,25,0.4);
+      border: 1px solid #FF5E19;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: -0.0375px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      backdrop-filter: blur(4px);
+      transition: background 120ms ease;
+    }
+    .story-banner-cta:active {
+      background: rgba(255,94,25,0.7);
+    }
+    .story-banner-cta svg { stroke: #fff; }
+
+    /* ────────────────────────────────────────────────
        SCREEN 3 — Date / Characters grid (1437-8055)
        ──────────────────────────────────────────────── */
     .date-screen { background: #fff; }
@@ -477,6 +636,190 @@
       grid-template-columns: repeat(3, 1fr);
       column-gap: 14px;
       row-gap: 22px;
+    }
+    .tab-pane[hidden] { display: none; }
+
+    /* 데이트 중 tab — chat list rows */
+    .chat-list {
+      position: absolute;
+      top: 152px;
+      left: 0; right: 0;
+      bottom: 78px;
+      overflow-y: auto;
+    }
+    .chat-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      cursor: pointer;
+      background: #fff;
+      border: 0;
+      width: 100%;
+      font-family: inherit;
+      text-align: left;
+      transition: background 120ms ease;
+    }
+    .chat-row:active { background: #fafafa; }
+    .chat-row.muted { opacity: 0.45; cursor: default; }
+    .chat-row .row-avatar {
+      flex-shrink: 0;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background-position: 50% 8%;
+      background-size: 230% auto;
+      background-repeat: no-repeat;
+      background-color: #ddd;
+    }
+    .chat-row .row-text {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .chat-row .row-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 15px;
+      color: #1a1a1a;
+      letter-spacing: -0.04px;
+    }
+    .chat-row .row-name .heart-count {
+      font-size: 12px;
+      color: #1a1a1a;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .chat-row .row-msg {
+      font-size: 13px;
+      color: #8c8c8c;
+      letter-spacing: -0.03px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .chat-row .row-badge {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--color-primary-500, #FF5E19);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 다시보기 tab — replay grid + VIP promo */
+    .replay-pane {
+      position: absolute;
+      top: 152px;
+      left: 0; right: 0;
+      bottom: 78px;
+      overflow-y: auto;
+      padding: 14px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .replay-info {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: #595959;
+      letter-spacing: -0.03px;
+    }
+    .replay-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .replay-card {
+      position: relative;
+      aspect-ratio: 1.05 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ddd;
+      background-position: center;
+      background-size: cover;
+      cursor: pointer;
+      border: 0;
+      padding: 0;
+    }
+    .replay-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 100%);
+    }
+    .replay-card .play-icon {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .replay-card .play-icon svg { color: var(--color-primary-500, #FF5E19); }
+    .replay-card .replay-name {
+      position: absolute;
+      bottom: 10px; left: 12px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.04px;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+    .vip-promo {
+      margin-top: auto;
+      background: #f5f5f5;
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .vip-promo .promo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .vip-promo .promo-title {
+      color: var(--color-primary-500, #FF5E19);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.035px;
+    }
+    .vip-promo .promo-sub {
+      font-size: 12px;
+      color: #595959;
+      letter-spacing: -0.03px;
+    }
+    .vip-promo .promo-cta {
+      flex-shrink: 0;
+      background: var(--color-primary-500, #FF5E19);
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
     }
     .char-card {
       display: flex;
@@ -661,6 +1004,56 @@
     </div>
   </section>
 
+  <!-- ─── SCREEN 4: STORY INTRO (chapter start) ─── -->
+  <section class="screen story-screen" id="screen-story" hidden data-name="스토리 시작 / 끝나지 않은 청춘의 불꽃">
+    <div class="statusbar">
+      <span>9:41</span>
+      <div class="icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><rect x="0" y="7" width="3" height="4" rx="0.6" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="0.6" fill="currentColor"/><rect x="9" y="3" width="3" height="8" rx="0.6" fill="currentColor"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.6" fill="currentColor"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M8 9.5l2-2c-1-1-3-1-4 0l2 2zM8 6.6c1.6 0 3.1.6 4.2 1.7l1.4-1.4C12 5.3 10.1 4.5 8 4.5c-2.1 0-4 .8-5.6 2.4l1.4 1.4C5 7.2 6.4 6.6 8 6.6zM8 3.7c2.6 0 5 1 6.8 2.8l1.4-1.4C14 2.9 11.1 1.7 8 1.7S2 2.9-.2 5.1l1.4 1.4C3 4.7 5.4 3.7 8 3.7z" fill="currentColor"/></svg>
+        <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="10.5" rx="2.5" stroke="currentColor" stroke-opacity="0.4"/><rect x="2" y="2" width="19" height="7.5" rx="1.5" fill="currentColor"/><rect x="23.5" y="4" width="1.5" height="3.5" rx="0.6" fill="currentColor" fill-opacity="0.4"/></svg>
+      </div>
+    </div>
+
+    <header class="story-top">
+      <div class="left">
+        <button class="icon-btn" id="btn-story-back" aria-label="back">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="avatar-ring">
+          <img src="assets/figma_characters/hong_jian_avatar.png" alt="홍지안" />
+        </div>
+        <div class="name-block">
+          <span class="name">홍지안</span>
+          <span class="meta"><span class="heart">🧡</span><span>0</span></span>
+        </div>
+      </div>
+      <div class="right">
+        <button class="icon-btn" aria-label="info">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8.5h.01"/></svg>
+        </button>
+        <span class="coin-pill"><span class="coin">¢</span>43</span>
+      </div>
+    </header>
+
+    <div class="story-body"></div>
+
+    <div class="story-bottom">
+      <div class="story-banner" style="background-image:url('assets/figma_characters/story_banner_youth.png')">
+        <div class="story-banner-content">
+          <div>
+            <div class="title">끝나지 않은 청춘의 불꽃</div>
+            <div class="subtitle">제주도 게스트 하우스에 도착한 당신.</div>
+          </div>
+          <button class="story-banner-cta" id="btn-story-start">
+            <span>만나러 가기</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── SCREEN 3: DATE / CHARACTERS ─── -->
   <section class="screen date-screen" id="screen-date" hidden data-name="데이트 / 캐릭터 프로필">
     <div class="statusbar">
@@ -684,7 +1077,12 @@
       <button class="tab" data-tab="replay">다시보기</button>
     </div>
 
-    <div class="grid" id="char-grid"><!-- populated by JS --></div>
+    <!-- 데이트 중 (chat list) -->
+    <div class="chat-list tab-pane" id="pane-ongoing" hidden></div>
+    <!-- 캐릭터 프로필 (existing 3-col grid) -->
+    <div class="grid tab-pane" id="char-grid"></div>
+    <!-- 다시보기 (replay grid + VIP promo) -->
+    <div class="replay-pane tab-pane" id="pane-replay" hidden></div>
 
     <nav class="bottom-nav">
       <button class="nav-item" data-go="home">
@@ -723,6 +1121,7 @@
     home: document.getElementById('screen-home'),
     match: document.getElementById('screen-match'),
     date: document.getElementById('screen-date'),
+    story: document.getElementById('screen-story'),
   };
 
   function showScreen(name) {
@@ -754,23 +1153,39 @@
      vertical scroll snaps between full-bleed cards.
      Each card has its own CTA → match success.
      ─────────────────────────────────────────────── */
+  /* video pool — randomly assigned per card on load */
+  const videoPool = [
+    'assets/videos/v1.mp4',
+    'assets/videos/v2.mp4',
+    'assets/videos/v3.mp4',
+    'assets/videos/v4.mp4',
+    'assets/videos/v5.mp4',
+  ];
+  function pickRandomVideos(n) {
+    const shuffled = videoPool.slice().sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, n);
+  }
+  const randomVids = pickRandomVideos(3);
   const cards = [
     {
-      img: 'assets/figma_characters/kwon_mina_match.png',
+      video: randomVids[0],
+      poster: 'assets/figma_characters/kwon_mina_match.png',
       tags: ['💈 미용사', '💔 NTR', '⛓️ BDSM'],
       name: '권미나', age: 21,
       quote: '뭘 봐요? 할 말 없으면 좀 비키지?',
       showHint: true,
     },
     {
-      img: 'assets/figma_characters/kang_iahn.png',
+      video: randomVids[1],
+      poster: 'assets/figma_characters/kang_iahn.png',
       tags: ['💄 미용사', '💕 츤데레'],
       name: '강이안', age: 32,
       quote: '저희 미용실 처음이시죠? 제가 머리 만져드릴게요~',
       showHint: false,
     },
     {
-      img: 'assets/figma_characters/girl_3.png',
+      video: randomVids[2],
+      poster: 'assets/figma_characters/girl_3.png',
       tags: ['🎀 비서', '💼 오피스'],
       name: '서지윤', age: 27,
       quote: '오늘 회의 자료 정리, 같이 도와주실래요?',
@@ -787,15 +1202,15 @@
     el.className = 'swipe-card';
     el.dataset.cardIndex = idx;
     el.innerHTML = `
-      <div class="card-img" style="background-image:url('${card.img}')"></div>
+      <video class="card-video" src="${card.video}" poster="${card.poster || ''}" autoplay muted loop playsinline preload="auto"></video>
       <div class="card-shade"></div>
       <div class="tag-row">
         ${card.tags.map(t => `<span class="tag">${t}</span>`).join('')}
       </div>
       ${card.showHint ? `
         <div class="swipe-hint">
-          <span class="swipe-msg">화면을 위로<br/>스와이프 해보세요</span>
           <img class="hand-pointer" src="assets/figma_characters/kwon_mina_swipe.png" alt="" />
+          <span class="swipe-msg">화면을<br/>위로 밀어보세요</span>
         </div>` : ''}
       <div class="profile-info">
         <div class="name-row">
@@ -804,7 +1219,7 @@
         </div>
         <div class="quote">${card.quote}</div>
       </div>
-      <button class="cta card-cta" data-card-cta="${idx}">대화 시작하기</button>
+      <button class="cta card-cta" data-card-cta="${idx}">만나러 가기</button>
     `;
     return el;
   }
@@ -815,6 +1230,24 @@
     stack.scrollTop = 0;
     activeCardIndex = 0;
     hideHintOnScroll();
+    setupVideoVisibilityControl();
+  }
+
+  /* Pause off-screen videos to save battery & bandwidth */
+  function setupVideoVisibilityControl() {
+    if (!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target.querySelector('.card-video');
+        if (!video) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { root: stack, threshold: [0, 0.5, 1] });
+    stack.querySelectorAll('.swipe-card').forEach(card => observer.observe(card));
   }
 
   function resetDeck() {
@@ -836,12 +1269,11 @@
     }, { passive: true });
   }
 
-  /* CTA per-card (delegated) */
+  /* CTA per-card (delegated) — "만나러 가기" → 바로 스토리 시작 화면 */
   stack.addEventListener('click', (e) => {
     const cta = e.target.closest('[data-card-cta]');
     if (!cta) return;
-    matchedFromCard = true;
-    showScreen('match');
+    showScreen('story');
   });
 
   /* Mouse-drag to scroll (desktop swipe gesture support) */
@@ -868,9 +1300,11 @@
     dragY = null;
     stack.style.scrollSnapType = 'y mandatory';
     // snap to nearest card
-    const targetIdx = Math.round((dragStartScroll - dy) / stack.clientHeight);
+    const stepH = stack.clientHeight + 20; // card height + gap
+    const targetIdx = Math.round((dragStartScroll - dy) / stepH);
     const clampedIdx = Math.max(0, Math.min(cards.length - 1, targetIdx));
-    stack.scrollTo({ top: clampedIdx * stack.clientHeight, behavior: 'smooth' });
+    const targetEl = stack.children[clampedIdx];
+    stack.scrollTo({ top: targetEl ? targetEl.offsetTop : clampedIdx * stepH, behavior: 'smooth' });
   }
   stack.addEventListener('pointerup', endDrag);
   stack.addEventListener('pointercancel', endDrag);
@@ -882,6 +1316,14 @@
   document.getElementById('btn-chat-now').addEventListener('click', () => {
     toast('채팅 화면으로 이동 (프로토타입 범위 밖)');
   });
+  /* ─── Screen 4: Story start handlers ─── */
+  document.getElementById('btn-story-back').addEventListener('click', () => {
+    showScreen('home');
+  });
+  document.getElementById('btn-story-start').addEventListener('click', () => {
+    toast('스토리 시작 (프로토타입 범위 밖)');
+  });
+
   document.getElementById('btn-browse-more').addEventListener('click', () => {
     // "더 둘러보기" → 메인 화면으로 복귀 (첫 카드부터)
     matchedFromCard = false;
@@ -917,14 +1359,99 @@
     grid.appendChild(card);
   });
 
-  /* ─── Tabs (visual only) ─── */
+  /* ─── 데이트 중 (chat list) — rough placeholder data ─── */
+  const ongoingPane = document.getElementById('pane-ongoing');
+  const sampleAvatars = [
+    'assets/figma_characters/hong_jian_avatar.png',
+    'assets/figma_characters/kwon_mina_profile.png',
+    'assets/figma_characters/kang_iahn.png',
+    'assets/figma_characters/girl_3.png',
+  ];
+  const ongoingChars = [
+    { name: '홍지안', heart: 0,  msg: '정말 죄송합니다 ㅠㅠㅠㅠ',         unread: 1 },
+    { name: '정하윤', heart: 2,  msg: '제가 반나절 동안 안 가도요...?!',  unread: 1 },
+    { name: '안예빈', heart: 1,  msg: '아무렇지도 않았어요...?',          unread: 1 },
+    { name: '장아영', heart: 0,  msg: '문 여세요.',                        unread: 0 },
+    { name: '최유연', heart: 0,  msg: '자리를 비움',                        unread: 0 },
+    { name: '이나영', heart: 0,  msg: '빨리!',                              unread: 1 },
+    { name: '나유정', heart: 10, msg: '엔딩을 완료했어요.',                muted: true },
+  ];
+  ongoingChars.forEach((c, i) => {
+    const row = document.createElement('button');
+    row.className = 'chat-row' + (c.muted ? ' muted' : '');
+    const avatar = sampleAvatars[i % sampleAvatars.length];
+    row.innerHTML = `
+      <div class="row-avatar" style="background-image:url('${avatar}')"></div>
+      <div class="row-text">
+        <div class="row-name">
+          <span>${c.name}</span>
+          <span class="heart-count">🧡 ${c.heart}</span>
+        </div>
+        <div class="row-msg">${c.msg}</div>
+      </div>
+      ${c.unread ? `<div class="row-badge">${c.unread}</div>` : ''}
+    `;
+    row.addEventListener('click', () => {
+      if (c.muted) return;
+      toast(c.name + ' 대화방으로 이동 (프로토타입 범위 밖)');
+    });
+    ongoingPane.appendChild(row);
+  });
+
+  /* ─── 다시보기 (replay grid + VIP promo) — rough placeholder ─── */
+  const replayPane = document.getElementById('pane-replay');
+  const replayChars = [
+    { name: '이수아', img: 'assets/figma_characters/kwon_mina_match.png' },
+    { name: '김지유', img: 'assets/figma_characters/kang_iahn.png' },
+    { name: '김진혁', img: 'assets/figma_characters/girl_3.png' },
+    { name: '하도연', img: 'assets/figma_characters/hong_jian_avatar.png' },
+  ];
+  replayPane.innerHTML = `
+    <div class="replay-info">
+      최근 2주간 완료한 엔딩을 다시볼 수 있습니다.<br/>
+      2주가 지난 엔딩은 VIP 멤버십으로 이용 가능합니다.
+    </div>
+    <div class="replay-grid">
+      ${replayChars.map(c => `
+        <button class="replay-card" data-name="${c.name}" style="background-image:url('${c.img}')">
+          <span class="play-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="replay-name">${c.name}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div class="vip-promo">
+      <div class="promo-text">
+        <span class="promo-title">리즈 VIP 멤버십</span>
+        <span class="promo-sub">다시보기 무제한, 보석 150개 적립</span>
+      </div>
+      <button class="promo-cta">혜택 보기</button>
+    </div>
+  `;
+  replayPane.addEventListener('click', (e) => {
+    const card = e.target.closest('.replay-card');
+    if (card) {
+      toast(card.dataset.name + ' 다시보기 재생 (프로토타입 범위 밖)');
+      return;
+    }
+    if (e.target.classList.contains('promo-cta')) {
+      toast('VIP 멤버십 페이지로 이동 (프로토타입 범위 밖)');
+    }
+  });
+
+  /* ─── Tabs — switch panes ─── */
+  const panes = {
+    ongoing:  document.getElementById('pane-ongoing'),
+    profiles: document.getElementById('char-grid'),
+    replay:   document.getElementById('pane-replay'),
+  };
   document.querySelectorAll('.tab').forEach(t => {
     t.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
       t.classList.add('active');
-      if (t.dataset.tab !== 'profiles') {
-        toast('이 탭은 프로토타입 범위 밖이에요');
-      }
+      const target = t.dataset.tab;
+      Object.entries(panes).forEach(([k, el]) => { el.hidden = (k !== target); });
     });
   });
 </script>
